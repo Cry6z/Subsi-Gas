@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Quicksand', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-primary: #0ea5e9;
+    --color-primary-500: #0284c7;
+    --color-accent: var(--color-primary);
+    --color-accent-content: var(--color-primary);
+    --color-accent-foreground: var(--color-white);
+
+    --color-neutral-100: #f1f5f9;
+    --color-neutral-200: #e2e8f0;
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-primary);
+        --color-accent-content: var(--color-primary);
+        --color-accent-foreground: var(--color-white);
+    }
+}
+
+@layer base {
+
+    :root {
+        font-family: var(--font-sans);
+    }
+
+    body {
+        font-family: var(--font-sans);
+        transition: background-color 500ms cubic-bezier(0.4, 0, 0.2, 1), color 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body *,
+    body *::before,
+    body *::after {
+        transition-property: background-color, color, border-color, fill, stroke;
+        transition-duration: 500ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        body *,
+        body *::before,
+        body *::after {
+            transition-duration: 0s !important;
+        }
+    }
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+@layer components {
+    .sg-page {
+        @apply flex flex-col gap-6;
+    }
+
+    .sg-gradient-bg {
+        @apply min-h-screen bg-slate-950 text-white;
+    }
+
+    .glass-panel {
+        @apply rounded-3xl border border-white/10 bg-white/10 p-6 text-white shadow-2xl backdrop-blur;
+    }
+
+    .glass-panel-dark {
+        @apply rounded-3xl border border-slate-200 bg-white/70 p-6 text-slate-900 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white;
+    }
+
+    .hero-badge {
+        @apply inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80;
+    }
+
+    .hero-heading {
+        @apply text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl;
+    }
+
+    .hero-subheading {
+        @apply text-base text-white/80 sm:text-lg;
+    }
+
+    .feature-pill {
+        @apply flex items-center gap-3 rounded-2xl bg-white/5 px-4 py-3 text-sm font-medium text-white/90;
+    }
+
+    .sg-icon-btn {
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200/60 bg-white/80 text-zinc-700 shadow-sm backdrop-blur transition hover:bg-white dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:text-zinc-200;
+    }
+
+    .sg-card {
+        @apply rounded-2xl border border-zinc-200/60 bg-white/90 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/60;
+    }
+
+    .sg-card-hover {
+        @apply transition hover:shadow-md hover:-translate-y-0.5;
+    }
+
+    .stat-card {
+        @apply rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-lg transition dark:border-white/10 dark:bg-white/5;
+    }
+
+    .stat-card-accent {
+        @apply rounded-3xl bg-gradient-to-br from-sky-500 to-cyan-500 p-6 text-white shadow-xl;
+    }
+
+    .sg-stat {
+        @apply p-5;
+    }
+
+    .sg-stat-title {
+        @apply text-sm text-zinc-500 dark:text-zinc-400;
+    }
+
+    .sg-stat-value {
+        @apply mt-1 text-3xl font-semibold tracking-tight;
+    }
+
+    .sg-icon {
+        @apply inline-flex size-10 items-center justify-center rounded-xl bg-zinc-900/5 text-zinc-700 dark:bg-white/10 dark:text-zinc-200;
+    }
+
+    .dashboard-hero {
+        @apply rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-900 via-slate-900/95 to-slate-800 p-6 text-white shadow-2xl dark:border-white/10;
+    }
+
+    .dashboard-hero__actions {
+        @apply flex flex-wrap gap-2 text-white/80;
+    }
+
+    .list-card {
+        @apply flex items-start gap-4 rounded-2xl border border-slate-200/70 p-5 transition hover:-translate-y-0.5 hover:border-slate-400 dark:border-white/10;
+    }
+
+    .login-panel {
+        @apply w-full max-w-lg rounded-3xl border border-slate-200 bg-white/95 p-8 shadow-2xl dark:border-white/10 dark:bg-slate-900/90;
+    }
+
+    .login-accent {
+        @apply absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-sky-500/30 via-cyan-400/30 to-slate-900 blur-3xl;
+    }
+}
+
+/* [:where(&)]:size-4 {
+    @apply size-4;
+} */
