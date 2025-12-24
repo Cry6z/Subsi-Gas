@@ -135,3 +135,6 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 - Two-factor authentication is disabled.
 - Email verification is disabled.
+
+
+# Team with @ReiiMurr
